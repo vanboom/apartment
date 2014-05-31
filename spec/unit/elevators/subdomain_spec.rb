@@ -35,6 +35,32 @@ describe Apartment::Elevators::Subdomain do
         elevator.parse_tenant_name(request).should be_nil
       end
     end
+    
+    context "with append_app option" do
+      before do
+        Apartment::Elevators::Subdomain.append_string = '_myapp'
+      end
+      after do
+        Apartment::Elevators::Subdomain.append_string = nil
+      end
+    
+      it "should append the Rails application name to the subdomain tenant" do
+        request = ActionDispatch::Request.new("HTTP_HOST"=>'foo.bar.co.uk')
+        elevator.parse_tenant_name(request).should == 'foo_myapp'
+      end
+      it "should return the base domain if no subdomain is present" do
+        request = ActionDispatch::Request.new("HTTP_HOST"=>'localhost')
+        elevator.parse_tenant_name(request).should == 'localhost_app'
+      end
+      it "should return the base domain if less than tld_count subdomains are present" do
+        request = ActionDispatch::Request.new("HTTP_HOST"=>'foo.bar')
+        elevator.parse_tenant_name(request).should == 'foo_myapp'
+      end
+      it "should truncate any port information" do
+        request = ActionDispatch::Request.new("HTTP_HOST"=>'localhost:3000')
+        elevator.parse_tenant_name(request).should == 'localhost_myapp'
+      end
+    end
   end
 
   describe "#call" do

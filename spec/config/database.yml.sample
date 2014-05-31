@@ -25,9 +25,11 @@ connections:
     adapter: postgresql
     database: apartment_postgresql_test
     min_messages: WARNING
-    username: postgres
+    username: ruby
+    host: 192.168.0.11
+    port: 5432
     schema_search_path: public
-    password:
+    password: abcdef123
 
   mysql:
     adapter: mysql2

@@ -18,14 +18,14 @@ Gem::Specification.new do |s|
   s.homepage = %q{https://github.com/influitive/apartment}
   s.licenses = ["MIT"]
 
-  s.add_dependency 'activerecord',    '>= 3.1.2', '< 4.1'   # must be >= 3.1.2 due to bug in prepared_statements
+  s.add_dependency 'activerecord',    '>= 3.1.2', '<= 4.1.0'   # must be >= 3.1.2 due to bug in prepared_statements
   s.add_dependency 'rack',            '>= 1.3.6'
 
   s.add_development_dependency 'appraisal'
   s.add_development_dependency 'rake',         '~> 0.9'
   s.add_development_dependency 'rspec-rails',  '~> 2.14'
   s.add_development_dependency 'guard-rspec',  '~> 4.2'
-  s.add_development_dependency 'capybara',     '~> 1.0.0'
+  s.add_development_dependency 'capybara'
 
   if defined?(JRUBY_VERSION)
     s.add_development_dependency 'activerecord-jdbc-adapter'
