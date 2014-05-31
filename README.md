@@ -287,6 +287,19 @@ and test environments.  If you wish to turn this option off in production, you c
 config.prepend_environment = !Rails.env.production?
 ```
 
+## Vanboom Modifications
+### Apartment::Elevators::Subdomain
+This elevator has been modified to allow prefix and append strings to the subdomain...useful if you are serving multiple SaaS applications to the same subdomain client. 
+
+Apartment::Elevators::Subdomain.prefix_string = "something"
+Apartment::Elevators::Subdomain.append_string = "after"
+
+http://my.cloud.com becomes the "somethingmyafter" tenant.
+
+## Testing
+
+The Subdomain Elevator has been modified to inhibit tenant switching when tests are run.
+
 ## Delayed::Job
 ### Has been removed... See apartment-sidekiq for a better backgrounding experience
 
