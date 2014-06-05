@@ -37,6 +37,7 @@ module Apartment
       def parse_tenant_name(request)
         # inhibit any subdomain tenant switching in test mode
         return nil if Rails.env == 'test'
+        puts "Requestion from %s" % request.host
         request_subdomain = subdomain(request.host)
 
         # If the domain acquired is set to be excluded, set the tenant to whatever is currently
