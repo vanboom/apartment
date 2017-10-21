@@ -74,7 +74,7 @@ module Apartment
         if s.count <= 1
           s
         else
-          s[0..-(Apartment.tld_length + 2)]
+          s[0..-(3)]
         end
       end
 
