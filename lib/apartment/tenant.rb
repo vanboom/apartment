@@ -60,7 +60,9 @@ module Apartment
     #   Fetch the rails database configuration
     #
     def config
-      @config ||= Apartment.connection_config
+      # restored by vanboom from https://github.com/influitive/apartment/commit/856dafe7ac673b1a805ef728bfc2dbdf69ea821a
+      @config ||= (ActiveRecord::Base.configurations[Rails.env] ||
+                    Rails.application.config.database_configuration[Rails.env]).symbolize_keys
     end
   end
 end
