@@ -187,15 +187,7 @@ module Apartment
       def import_database_schema
         ActiveRecord::Schema.verbose = false    # do not log schema load output.
 
-        if Apartment.database_schema_file
-          # switch the migrator to the migrate folder associated with the given schema.rb
-          old = ActiveRecord::Migrator.migrations_paths
-          s = Apartment.database_schema_file.gsub("schema.rb", "migrate")
-          ActiveRecord::Migrator.migrations_paths = [s]
-          load_or_raise(Apartment.database_schema_file)
-          ActiveRecord::Migrator.migrations_paths = old
-        end
-
+        load_or_raise(Apartment.database_schema_file) if Apartment.database_schema_file
       end
 
       #   Return a new config that is multi-tenanted
